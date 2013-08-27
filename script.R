@@ -5,4 +5,20 @@ mapFile.old<-read.delim("C:/Users/asus4/Documents/EarthMicrobiomeProject/QIIME_m
 
 #commit to git
 #fix issue with titles
-mapFile.old[,"TITLE"]
+unique(mapFile.old[,"TITLE"])
+
+#make new version to fix issue
+mapFile.new<-mapFile.old
+sort(mapFile.new[,"TITLE"])
+mapFile.new[,"TITLE"]<-"Intertidal microbes 16s for 2009 and 2010"
+unique(mapFile.new[,"TITLE"])
+
+#compare old and new versions
+mapFile.old==mapFile.new
+
+#find row and columns where two files do not match
+which(!mapFile.old==mapFile.new, arr.ind=TRUE)
+
+#can bind the old nad new versions together to compare side by side
+cbind(mapFile.old[which(!mapFile.old==mapFile.new, arr.ind=TRUE)],
+			+ mapFile.new[which(!mapFile.old==mapFile.new, arr.ind=TRUE)])
